@@ -155,7 +155,7 @@ function drawControlPanel() {
   drawMoodButton(btnX, startY + gap * 0, btnW, btnH, "happy", "Happy");
   drawMoodButton(btnX, startY + gap * 1, btnW, btnH, "calm", "Calm");
   drawMoodButton(btnX, startY + gap * 2, btnW, btnH, "sad", "Sad");
-  drawMoodButton(btnX, startY + gap * 3, btnW, btnH, "energetic", "Energetic");
+  drawMoodButton(btnX, startY + gap * 3, btnW, btnH, "focused", "Focused");
   drawMoodButton(btnX, startY + gap * 4, btnW, btnH, "crazy", "Crazy");
 
   let crazyBottom = startY + gap * 4 + btnH;
@@ -268,8 +268,8 @@ function drawSelectedSaver(x, y, w, h) {
     drawCalmSaver(x, y, w, h);
   } else if (selectedMood == "sad") {
     drawSadSaver(x, y, w, h);
-  } else if (selectedMood == "energetic") {
-    drawEnergeticSaver(x, y, w, h);
+  } else if (selectedMood == "focused") {
+    drawFocusedSaver(x, y, w, h);
   } else if (selectedMood == "crazy") {
     drawCrazySaver(x, y, w, h);
   }
@@ -493,8 +493,8 @@ function drawSadSaver(x, y, w, h) {
   }
 }
 
-// ENERGETIC
-function drawEnergeticSaver(x, y, w, h) {
+// FOCUSED
+function drawFocusedSaver(x, y, w, h) {
   // gradient inside box
   backgroundInBox(x, y, w, h, color(25, 15, 55), color(85, 20, 120));
 
@@ -630,7 +630,7 @@ function mousePressed() {
     } else if (overRect(btnX, startY + gap * 2, btnW, btnH)) {
       selectedMood = "sad";
     } else if (overRect(btnX, startY + gap * 3, btnW, btnH)) {
-      selectedMood = "energetic";
+      selectedMood = "focused";
     } else if (overRect(btnX, startY + gap * 4, btnW, btnH)) {
       selectedMood = "crazy";
     }
