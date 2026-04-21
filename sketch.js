@@ -8,22 +8,22 @@ let appState = "design";
 let previewX, previewY, previewW, previewH;
 
 // to store the elements of each mood
-let happyBubbles = [];
-let calmClouds = [];
-let rainDrops = [];
-let energeticRings = [];
-let crazyShapes = [];
+let bubbles = [];
+let clouds = [];
+let drops = [];
+let rings = [];
+let shapes = [];
 
-let thunderFlash = 0;
+let thunder = 0;
 let thunderTimer = 0;
 
-//-----------------------------SET UP
+//SET UP
 function setup() {
   createCanvas(windowWidth, windowHeight);
   textFont("Georgia"); //font georgia
   initializeVisuals();
 }
-//-----------------------------DRAW
+//DRAW
 //when user is in design page
 function draw() {
   if (appState == "design") {
@@ -39,11 +39,11 @@ function draw() {
   }
 }
 
-//-------------------SCREENSAVER ANIMATIONS
+//SCREENSAVER ANIMATIONS
 function initializeVisuals() {
-  happyBubbles = [];
+  bubbles = [];
   for (let i = 0; i < 18; i++) {
-    happyBubbles.push({
+    bubbles.push({
       x: random(0, 1000),
       y: random(0, 700),
       size: random(20, 55),
@@ -52,9 +52,9 @@ function initializeVisuals() {
     });
   }
 
-  calmClouds = [];
+  clouds = [];
   for (let i = 0; i < 8; i++) {
-    calmClouds.push({
+    clouds.push({
       x: random(0, 1000),
       y: random(70, 400),
       w: random(90, 160),
@@ -63,9 +63,9 @@ function initializeVisuals() {
     });
   }
 
-  rainDrops = [];
+  drops = [];
   for (let i = 0; i < 140; i++) {
-    rainDrops.push({
+    drops.push({
       x: random(0, 1000),
       y: random(-700, 700),
       len: random(10, 24),
@@ -73,17 +73,17 @@ function initializeVisuals() {
     });
   }
 
-  energeticRings = [];
+  rings= [];
   for (let i = 0; i < 4; i++) {
-    energeticRings.push({
+    rings.push({
       size: 70 + i * 70,
       speed: random(1.5, 3),
     });
   }
 
-  crazyShapes = [];
+  shapes = [];
   for (let i = 0; i < 24; i++) {
-    crazyShapes.push({
+    shapes.push({
       x: random(0, 1000),
       y: random(0, 700),
       size: random(15, 45),
@@ -93,30 +93,22 @@ function initializeVisuals() {
     });
   }
 }
-//------------------------------BACKGROUND
+//BACKGROUND
 
 function drawAppBackground() {
-  background(255, 204, 120); // main background color
+  background(255, 236, 209); // main background color
 
-  // the decorative bubbles here
-  noStroke();
-  fill(255, 230, 160);
-  ellipse(width * 0.15, height * 0.12, 240, 240);
-
-  fill(255, 170, 120, 120);
-  ellipse(width * 0.85, height * 0.18, 220, 220);
-
-  fill(255, 245, 220, 160);
+  fill(80, 40, 90);
   ellipse(width * 0.5, height * 0.9, width * 1.2, 260);
 }
 
-//--------------------------------TITLES
+//TITLES
 function drawTitle() {
   fill(80, 40, 90);
   textAlign(LEFT, CENTER);
   textStyle(BOLD);
   textSize(42);
-  text("VibeSaver", 40, 45);
+  text("Mood Screen", 40, 45);
 
   fill(120, 70, 120);
   textStyle(NORMAL);
@@ -124,9 +116,8 @@ function drawTitle() {
   text("Design a screensaver based on your mood", 42, 80);
 }
 
-//-----------------------------CONTROL PANEL
+//DESIGN PANEL
 function drawControlPanel() {
-  //panel positions
   let panelX = 35;
   let panelY = 110;
   let panelW = 360;
@@ -151,7 +142,7 @@ function drawControlPanel() {
   // choose your vibe section
   fill(95, 55, 110);
   textSize(17);
-  text("Choose your vibe", panelX + 20, panelY + 80);
+  text("Choose your mood", panelX + 20, panelY + 80);
 
   //buttons layout
   let btnX = panelX + 20;
@@ -183,7 +174,7 @@ function drawControlPanel() {
   textAlign(LEFT, CENTER);
   textStyle(BOLD);
   textSize(17);
-  text("Show Clock", panelX + 20, labelY - 14);
+  text("Show Clock?", panelX + 20, labelY - 14);
 
   let toggleGap = 12;
   let toggleW = (btnW - toggleGap) / 2;
@@ -200,7 +191,6 @@ function drawControlPanel() {
     !showClock
   );
 
-  // done button
   drawDoneButton(panelX + 70, doneY - 29, 220, doneH);
 }
 
@@ -222,13 +212,14 @@ function drawDoneButton(x, y, w, h) {
   text("Done", x + w / 2, y + h / 2);
 }
 
-//--------------------------PREVIEW SECTION
+//PREVIEW SECTION
 function drawPreviewWindow() {
   // preview box size
-  previewX = width * 0.34;
-  previewY = height * 0.12;
-  previewW = width * 0.62;
-  previewH = height * 0.74;
+  previewX = 450;
+  previewY = 110;
+  previewW = width - 500;
+  previewH = height - 180;
+
   //box
   noStroke();
   fill(255, 248, 235);
@@ -239,7 +230,7 @@ function drawPreviewWindow() {
   textAlign(LEFT, CENTER);
   textStyle(BOLD);
   textSize(24);
-  text("Live Preview", previewX + 25, previewY + 35);
+  text("Preview", previewX + 25, previewY + 35);
 
   // inner box
   let screenX = previewX + 20;
@@ -269,7 +260,7 @@ function drawPreviewWindow() {
   pop();
 }
 
-//-----------------------------SELECTION OF VIBE
+//SELECTION OF VIBE
 function drawSelectedSaver(x, y, w, h) {
   if (selectedMood == "happy") {
     drawHappySaver(x, y, w, h);
@@ -304,7 +295,7 @@ function drawBackButton() {
 
   noStroke();
 
-  //if mouse is hovering change to a lighter color
+  //mouse hovering color change
   if (overRect(x, y, w, h)) {
     fill(255, 245, 230, 240);
   } else {
@@ -322,12 +313,12 @@ function drawBackButton() {
   text("Back", x + w / 2, y + h / 2);
 }
 
-//------------------------------------MOOD BUTTONS (each mood)
+//MOOD BUTTONS
 function drawMoodButton(x, y, w, h, moodValue, label) {
   // this will check if button is selected
   let active = selectedMood == moodValue;
 
-  // if its selected turn darker color, if its hovering change to a lighter color and if its nothing - default color
+  // if its selected turn darker color, if it's hovering change to a lighter color and if its neither - default color
   noStroke();
   if (active) {
     fill(255, 190, 110);
@@ -351,7 +342,7 @@ function drawMoodButton(x, y, w, h, moodValue, label) {
 function drawToggle(x, y, w, h, label, active) {
   noStroke();
 
-  //   // if its selected turn darker color, if its hovering change to a lighter color and if its nothing - default color
+  //if its selected turn darker color, if its hovering change to a lighter color and if its neither - default color
 
   if (active) {
     fill(255, 190, 110);
@@ -395,8 +386,8 @@ function drawHappySaver(x, y, w, h) {
   ];
 
   //move bubbles
-  for (let i = 0; i < happyBubbles.length; i++) {
-    let b = happyBubbles[i];
+  for (let i = 0; i < bubbles.length; i++) {
+    let b = bubbles[i];
     let c = bubbleColors[i % bubbleColors.length];
 
     fill(c[0], c[1], c[2], c[3]);
@@ -421,13 +412,13 @@ function drawCalmSaver(x, y, w, h) {
 
   noStroke();
 
-  // sun/moon
+  // sun
   fill(255, 250, 235, 180);
   ellipse(x + w * 0.8, y + h * 0.22, 90, 90);
 
   // clouds moving
-  for (let i = 0; i < calmClouds.length; i++) {
-    let c = calmClouds[i];
+  for (let i = 0; i < clouds.length; i++) {
+    let c = clouds[i];
 
     fill(255, 255, 255, 95);
     ellipse(x + c.x, y + c.y, c.w, c.h);
@@ -457,8 +448,8 @@ function drawSadSaver(x, y, w, h) {
   // rain
   stroke(170, 210, 255, 150);
   strokeWeight(2);
-  for (let i = 0; i < rainDrops.length; i++) {
-    let r = rainDrops[i];
+  for (let i = 0; i < drops.length; i++) {
+    let r = drops[i];
 
     // rain
     line(x + (r.x % w), y + r.y, x + (r.x % w) - 6, y + r.y + r.len);
@@ -476,12 +467,12 @@ function drawSadSaver(x, y, w, h) {
 
   // random thunder
   if (thunderTimer > 110 && random(1) < 0.03) {
-    thunderFlash = 255;
+    thunder = 255;
     thunderTimer = 0;
   }
 
   //lightning
-  if (thunderFlash > 0) {
+  if (thunder > 0) {
     stroke(255, 255, 210);
     strokeWeight(4);
     let tx = x + w * 0.72;
@@ -494,11 +485,11 @@ function drawSadSaver(x, y, w, h) {
 
     // flash overlay
     noStroke();
-    fill(255, 255, 255, thunderFlash * 0.35);
+    fill(255, 255, 255, thunder * 0.35);
     rect(x, y, w, h);
 
     // fading out
-    thunderFlash -= 18;
+    thunder -= 18;
   }
 }
 
@@ -513,8 +504,8 @@ function drawEnergeticSaver(x, y, w, h) {
 
   noFill();
   // loop
-  for (let i = 0; i < energeticRings.length; i++) {
-    let ring = energeticRings[i];
+  for (let i = 0; i < rings.length; i++) {
+    let ring = rings[i];
 
     // each ring has a different color depending on position of array
     if (i == 0) stroke(255, 80, 120, 180);
@@ -536,34 +527,15 @@ function drawEnergeticSaver(x, y, w, h) {
       ring.size = 60;
     }
   }
-
-  // lines going in many directions and goes around the circle
-  for (let a = 0; a < TWO_PI; a += PI / 8) {
-    stroke(255, 255, 255, 90);
-    strokeWeight(2);
-
-    // r1 is where line starts
-    let r1 = 60;
-
-    //r2 is where line ends
-    let r2 = 170 + sin(frameCount * 0.08 + a) * 25;
-    line(
-      //make it move in and out
-      cx + cos(a) * r1,
-      cy + sin(a) * r1,
-      cx + cos(a) * r2,
-      cy + sin(a) * r2
-    );
-  }
 }
 
 // CRAZY
 function drawCrazySaver(x, y, w, h) {
   backgroundInBox(x, y, w, h, color(255, 90, 140), color(120, 60, 255));
 
-  // crazy shapes moving
-  for (let i = 0; i < crazyShapes.length; i++) {
-    let s = crazyShapes[i];
+  // shapes moving
+  for (let i = 0; i < shapes.length; i++) {
+    let s = shapes[i];
 
     // choose shape color based on index
     if (i % 4 == 0) fill(255, 235, 90, 180);
@@ -598,16 +570,8 @@ function drawCrazySaver(x, y, w, h) {
     if (s.x < 0 || s.x > w) s.dx *= -1;
     if (s.y < 0 || s.y > h) s.dy *= -1;
   }
-
-  // white lines on top
-  stroke(255, 255, 255, 70);
-  strokeWeight(2);
-  for (let i = 0; i < 10; i++) {
-    let xx = x + noise(frameCount * 0.02 + i) * w;
-    line(xx, y, x + w - xx + x, y + h);
-  }
 }
-//-------------------------------------DATE AND TIME
+//DATE AND TIME
 function drawDateTime(x, y, w, h) {
   fill(255);
   noStroke();
@@ -633,7 +597,7 @@ function drawDateTime(x, y, w, h) {
   text(hr + ":" + mn + ":" + sc, x + w / 2, y + h / 2);
 }
 
-// -------------- BACKGROUND
+// BACKGROUND
 function backgroundInBox(x, y, w, h, c1, c2) {
   noStroke();
   fill(c1);
@@ -644,7 +608,7 @@ function overRect(x, y, w, h) {
   return mouseX > x && mouseX < x + w && mouseY > y && mouseY < y + h;
 }
 
-//-------------------------Mouse Pressed
+// Mouse Pressed
 // detects in app state design
 function mousePressed() {
   if (appState == "design") {
@@ -695,7 +659,7 @@ function mousePressed() {
   }
 }
 
-//----------------------------resize
+//resize
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
