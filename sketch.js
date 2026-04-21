@@ -225,11 +225,10 @@ function drawDoneButton(x, y, w, h) {
 //--------------------------PREVIEW SECTION
 function drawPreviewWindow() {
   // preview box size
-  previewX = 450;
-  previewY = 110;
-  previewW = width - 500;
-  previewH = height - 180;
-
+  previewX = width * 0.34;
+  previewY = height * 0.12;
+  previewW = width * 0.62;
+  previewH = height * 0.74;
   //box
   noStroke();
   fill(255, 248, 235);
