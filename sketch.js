@@ -556,7 +556,7 @@ function drawCrazySaver(x, y, w, h) {
     s.x += s.dx;
     s.y += s.dy;
 
-    // if shape hits boundry, reverse the direction
+    // if shape hits boundary, reverse the direction
     if (s.x < 0 || s.x > w) s.dx *= -1;
     if (s.y < 0 || s.y > h) s.dy *= -1;
   }
