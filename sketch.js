@@ -368,16 +368,6 @@ function drawHappySaver(x, y, w, h) {
 
   noStroke();
 
-  //sun
-  fill(255, 235, 90);
-  ellipse(x + w * 0.82, y + h * 0.2, 110, 110);
-
-  // clouds
-  fill(255, 255, 255, 120);
-  ellipse(x + w * 0.2, y + h * 0.22, 120, 60);
-  ellipse(x + w * 0.3, y + h * 0.18, 90, 50);
-  ellipse(x + w * 0.38, y + h * 0.23, 110, 55);
-
   let bubbleColors = [
     [255, 90, 120, 170],
     [90, 180, 255, 170],
