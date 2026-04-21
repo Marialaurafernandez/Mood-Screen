@@ -1,4 +1,9 @@
-/// variables
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/p5.js"></script>
+    <script src=/// variables
 let selectedMood = "happy";
 let showClock = true;
 // to control the screen "design" = the screen to design the screensaver and "screensaver" is the actual full screen saver view
@@ -700,3 +705,17 @@ function mousePressed() {
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight);
 }
+"https://cdn.jsdelivr.net/npm/p5@1.11.13/lib/addons/p5.sound.min.js"></script>
+    
+    
+    
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <meta charset="utf-8" />
+
+  </head>
+  <body>
+    <main>
+    </main>
+    <script src="sketch.js"></script>
+  </body>
+</html>
